@@ -1,0 +1,6 @@
+objectives.txt
+config.cfg
+.vs/
+.vscode/
+env
+__pycache__
