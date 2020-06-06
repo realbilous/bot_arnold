@@ -1,11 +1,11 @@
 from bot import telegram_chatbot
+import csv
+from reply import read_data, make_reply
+
+countries_dict = read_data()
 
 update_id = None
 bot = telegram_chatbot("config.cfg")
-
-def make_reply(msg):
-    reply = "Received."
-    return reply
 
 while True:
     print("...")
@@ -18,7 +18,10 @@ while True:
                 message = str(item["message"]["text"])
             except:
                 message = None
-            #print(message)
+            if message == None:
+                continue
             from_id = item["message"]["from"]["id"]
-            reply = make_reply(message)
-            bot.send_message(reply, from_id)
+            text, img_url = make_reply(message, countries_dict)
+            bot.send_photo(img_url, from_id)
+            bot.send_message(text, from_id)
+

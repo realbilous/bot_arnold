@@ -19,6 +19,11 @@ class telegram_chatbot():
         if msg is not None:
             requests.get(url)
 
+    def send_photo(self, img_url, chat_id):
+        url = self.base + f"/sendPhoto?chat_id={chat_id}&photo={img_url}"
+        if img_url is not None:
+            requests.get(url)
+
     def read_token(self, config):
         parser = cfg.ConfigParser()
         parser.read(config)
