@@ -7,6 +7,10 @@ countries_dict = read_data()
 update_id = None
 bot = telegram_chatbot("config.cfg")
 
+
+starter = "Hello! I am Arnold Bot.\nI will help you find the facts on any coutry of your interest." +\
+          "\nJust type its name! (e.g. United States)"
+
 while True:
     print("...")
     updates = bot.get_updates(offset=update_id)
@@ -21,6 +25,9 @@ while True:
             if message == None:
                 continue
             from_id = item["message"]["from"]["id"]
+            if message == "/start":
+                bot.send_message(starter, from_id)
+                continue
             text, img_url = make_reply(message, countries_dict)
             bot.send_photo(img_url, from_id)
             bot.send_message(text, from_id)
