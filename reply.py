@@ -16,9 +16,13 @@ def make_reply(msg, countries_dict):
             str: A string with url to an image
 
     """
+    # Format msg so that it match case of a country in countries_dict.keys()
+    f = lambda word: word.title() if word != "the" and word != "and" else word
+    msg = " ".join([f(word) for word in msg.lower().split(" ")])
+    
     reply = 'Not found.'
     img_url = None
-    if msg in countries_dict.keys():
+    if msg in countries_dict.keys(): 
         reply = "Country: " + msg
         for i in range(len(headers) - 1): 
             # Write a name of an attribute and corresponding data 
