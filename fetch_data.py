@@ -4,6 +4,10 @@ import requests
 import csv
 import re
 
+# After data was fetched, a couple of corrections were made manually
+# Among these are: Capital of Switzerland, Off. Languages of Mauritius,  Off. Languages of Belarus
+
+
 # Data of interest 
 countries = []
 capitals = []
@@ -68,6 +72,7 @@ for country in countries:
 
     response = requests.get("https:" + flag[0].img["src"])
 
+    # Save image of a flag
     with open(f"data\\flags\\Flag of {country}.png", "wb") as file:
         file.write(response.content)
 
